@@ -1,0 +1,16 @@
+@startuml atividade-ocorrencia
+
+start
+: Catequista cria ocorrência;
+: Preencher descrição;
+: Salvar como rascunho;
+: Enviar para coordenação;
+: Coordenação analisa;
+if (Aprovada?) then (Sim)
+  : Registrar como finalizada;
+else (Não)
+  : Coordenacao edita ou devolve para revisão;
+endif
+stop
+
+@enduml

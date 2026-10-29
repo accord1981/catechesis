@@ -1,0 +1,98 @@
+@startuml catechesis_usecases
+
+skinparam maxWidth 1200
+skinparam maxHeight 800
+left to right direction
+
+
+' ============================================
+' ATORES
+' ============================================
+
+actor Coordenacao as "Coordenação da Catequese"
+actor Catequista as "Catequista"
+actor Responsavel as "Responsável"
+
+' ============================================
+' CASOS DE USO
+' ============================================
+
+usecase "Gerenciar Catequizandos\n(Cadastrar, Editar, Excluir)" as UC_Catqz
+usecase "Gerenciar Catequistas\n(Cadastrar, Editar, Excluir)" as UC_Catqst
+usecase "Gerenciar Turmas\n(Cadastrar, Editar, Excluir)" as UC_Turmas
+usecase "Gerenciar Itinerários\n(Incluir Etapas/Tempos)" as UC_Itinerarios
+usecase "Gerenciar Espaços Catequéticos" as UC_Espacos
+usecase "Gerenciar Recursos Pedagógicos" as UC_Recursos
+
+usecase "Realizar Matrícula\n(Indicar Documentos)" as UC_Matricula
+usecase "Associar Catequistas às Turmas" as UC_AssocCatqstTurma
+usecase "Associar Catequizandos às Turmas" as UC_AssocCatqzTurma
+usecase "Gerenciar Agenda de Encontros" as UC_Agenda
+
+usecase "Registrar Frequência Catequese" as UC_FreqCat
+usecase "Registrar Frequência Missa" as UC_FreqMissa
+
+usecase "Registrar Ocorrência" as UC_Ocorr
+usecase "Analisar/Editar Ocorrência\n(Coordenacao)" as UC_OcorrAnalise
+
+usecase "Gerenciar Plano Catequético\n(Encontros, Temas, Carga Horária)" as UC_PlanoCatequetico
+
+usecase "Gerenciar Carteirinhas\n(Aquisição, Multas)" as UC_Carteirinhas
+
+usecase "Registrar/Atualizar Sacramentos\n(Batismo, Eucaristia, Crisma)" as UC_Sacramentos
+usecase "Relatórios de Sacramentos\n(Pendências)" as UC_RelSacramentos
+
+usecase "Gerenciar Eventos de Símbolos" as UC_Simbolos
+usecase "Registrar Entrega de Símbolos" as UC_EntregaSimbolos
+
+usecase "Registrar Histórico Catequizando\n(Ano, Etapa, Turma, Catequista)" as UC_HistCatqz
+usecase "Registrar Histórico Catequista\n(Ano, Etapa, Turma)" as UC_HistCatqst
+
+usecase "Solicitar Mudança de Turma" as UC_Mudanca
+usecase "Processar Mudança de Turma" as UC_ProcessaMudanca
+
+usecase "Enviar Alertas WhatsApp\n(Faltas e Acúmulo)" as UC_WhatsApp
+
+usecase "Gerar Relatórios Gerais\n(Frequência, Ocorrências, Turmas, Símbolos)" as UC_Relatorios
+
+
+' ============================================
+' RELACIONAMENTOS DOS ATORES
+' ============================================
+
+' Coordenação
+Coordenacao --> UC_Catqz
+Coordenacao --> UC_Catqst
+Coordenacao --> UC_Turmas
+Coordenacao --> UC_Itinerarios
+Coordenacao --> UC_Espacos
+Coordenacao --> UC_Recursos
+Coordenacao --> UC_Matricula
+Coordenacao --> UC_AssocCatqstTurma
+Coordenacao --> UC_AssocCatqzTurma
+Coordenacao --> UC_Agenda
+Coordenacao --> UC_FreqCat
+Coordenacao --> UC_FreqMissa
+Coordenacao --> UC_OcorrAnalise
+Coordenacao --> UC_PlanoCatequetico
+Coordenacao --> UC_Carteirinhas
+Coordenacao --> UC_Sacramentos
+Coordenacao --> UC_RelSacramentos
+Coordenacao --> UC_Simbolos
+Coordenacao --> UC_EntregaSimbolos
+Coordenacao --> UC_HistCatqz
+Coordenacao --> UC_HistCatqst
+Coordenacao --> UC_ProcessaMudanca
+Coordenacao --> UC_WhatsApp
+Coordenacao --> UC_Relatorios
+
+' Catequista
+Catequista --> UC_FreqCat
+Catequista --> UC_FreqMissa
+Catequista --> UC_Ocorr
+Catequista --> UC_EntregaSimbolos
+
+' Responsável
+Responsavel --> UC_Mudanca
+
+@enduml

@@ -1,0 +1,12 @@
+@startuml sequencia-frequencia
+
+actor Catequista
+participant Sistema
+participant Banco
+
+Catequista -> Sistema: Registrar presença
+Sistema -> Banco: Inserir frequência
+Banco --> Sistema: OK
+Sistema --> Catequista: Confirmação
+
+@enduml

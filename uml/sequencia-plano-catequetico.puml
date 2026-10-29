@@ -1,0 +1,12 @@
+@startuml sequencia-plano-catequetico
+
+actor Coordenacao
+participant Sistema
+participant Banco
+
+Coordenacao -> Sistema: Criar plano catequético
+Sistema -> Banco: Inserir encontro (numeroEncontro, tema, cargaHoraria)
+Banco --> Sistema: OK
+Sistema --> Coordenacao: Confirmação
+
+@enduml

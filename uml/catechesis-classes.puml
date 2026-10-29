@@ -1,0 +1,243 @@
+@startuml catechesis_classes
+
+' ============================
+' CLASSES PRINCIPAIS
+' ============================
+
+class Catequizando {
+    +id: Long
+    +nome: String
+    +dataNascimento: Date
+    +rg: String
+    +cpf: String
+    +nomeResponsavel: String
+    +rgResponsavel: String
+    +cpfResponsavel: String
+    +telefoneCatequizando: String
+    +telefoneResponsavel: String
+    +endereco: String
+    +status: StatusCatequizando
+    +categoriaMatricula: CategoriaMatricula
+    +linkDocumentos: String
+}
+
+enum StatusCatequizando {
+    FREQUENTANDO
+    DESISTENTE
+    TRANSFERIDO
+}
+
+enum CategoriaMatricula {
+    NOVA
+    RENOVACAO
+    TRANSFERENCIA
+}
+
+class Catequista {
+    +id: Long
+    +nome: String
+    +telefone: String
+    +email: String
+    +status: StatusCatequista
+}
+
+enum StatusCatequista {
+    ATIVA
+    AFASTADO
+    RESTRICAO
+}
+
+class Turma {
+    +id: Long
+    +nome: String
+}
+
+class Itinerario {
+    +id: Long
+    +nome: String
+    +descricao: String
+    +faixaEtaria: String
+}
+
+class EtapaTempo {
+    +id: Long
+    +etapaTempo: Integer
+    +referenciaBibliografica: String
+    +principaisConteudos: String
+}
+
+Itinerario "1" --> "*" EtapaTempo : etapasTempos
+
+class EspacoCatequetico {
+    +id: Long
+    +nome: String
+    +capacidade: Integer
+}
+
+class AgendaEncontros {
+    +id: Long
+    +diaSemana: String
+    +horarioInicio: Time
+    +horarioFim: Time
+}
+
+Turma "1" --> "1" Itinerario
+Turma "1" --> "1" EspacoCatequetico
+Turma "1" --> "1" AgendaEncontros
+Turma "1" --> "*" Catequizando
+Turma "*" --> "*" Catequista
+
+' ============================
+' HISTÓRICOS
+' ============================
+
+class HistoricoCatequizando {
+    +id: Long
+    +ano: Integer
+    +statusFinal: StatusItinerario
+}
+
+enum StatusItinerario {
+    APTO
+    RETIDO
+}
+
+HistoricoCatequizando "*" --> "1" Catequizando
+HistoricoCatequizando "1" --> "1" Turma
+HistoricoCatequizando "1" --> "1" Catequista
+HistoricoCatequizando "1" --> "1" Itinerario
+
+class HistoricoCatequista {
+    +id: Long
+    +ano: Integer
+}
+
+HistoricoCatequista "*" --> "1" Catequista
+HistoricoCatequista "1" --> "1" Turma
+HistoricoCatequista "1" --> "1" Itinerario
+
+' ============================
+' FREQUÊNCIA
+' ============================
+
+class Frequencia {
+    +id: Long
+    +data: Date
+    +tipo: TipoFrequencia
+    +presente: Boolean
+}
+
+enum TipoFrequencia {
+    CATEQUESE
+    MISSA
+}
+
+Frequencia "*" --> "1" Catequizando
+Frequencia "*" --> "1" Turma
+
+' ============================
+' OCORRÊNCIAS
+' ============================
+
+class Ocorrencia {
+    +id: Long
+    +descricao: String
+    +data: Date
+    +status: StatusOcorrencia
+}
+
+enum StatusOcorrencia {
+    RASCUNHO
+    ENVIADA
+    ANALISE
+    FINALIZADA
+}
+
+Ocorrencia "*" --> "1" Catequizando
+Ocorrencia "1" --> "1" Catequista
+
+' ============================
+' PLANO CATEQUÉTICO
+' ============================
+
+class PlanoCatequetico {
+    +id: Long
+    +numeroEncontro: Integer
+    +data: Date
+    +tema: String
+    +cargaHoraria: Integer
+}
+
+PlanoCatequetico "1" --> "1" Turma
+
+' ============================
+' CARTEIRINHAS
+' ============================
+
+class CarteirinhaEvento {
+    +id: Long
+    +data: Date
+    +tipo: String
+    +multa: Double
+}
+
+CarteirinhaEvento "*" --> "1" Catequizando
+
+' ============================
+' SACRAMENTOS
+' ============================
+
+class Sacramentos {
+    +id: Long
+    +batismoRecebido: Boolean
+    +dataBatismo: Date
+    +documentoBatismo: String
+    +eucaristiaRecebida: Boolean
+    +dataEucaristia: Date
+    +documentoEucaristia: String
+    +crismaRecebida: Boolean
+    +dataCrisma: Date
+    +documentoCrisma: String
+    +celebrante: String
+}
+
+Sacramentos "1" --> "1" Catequizando
+
+' ============================
+' SÍMBOLOS
+' ============================
+
+class SimboloEvento {
+    +id: Long
+    +nomeSimbolo: String
+    +descricao: String
+    +dataEntrega: Date
+}
+
+class SimboloRecebido {
+    +id: Long
+    +data: Date
+}
+
+SimboloEvento "1" --> "*" SimboloRecebido
+SimboloRecebido "*" --> "1" Catequizando
+
+' ============================
+' MUDANÇA DE TURMA
+' ============================
+
+class SolicitacaoMudancaTurma {
+    +id: Long
+    +responsavel: String
+    +status: StatusSolicitacao
+}
+
+enum StatusSolicitacao {
+    ABERTA
+    PROCESSADA
+}
+
+SolicitacaoMudancaTurma "1" --> "1" Catequizando
+SolicitacaoMudancaTurma "1" --> "1" Turma
+
+@enduml

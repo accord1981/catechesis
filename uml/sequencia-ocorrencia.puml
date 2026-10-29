@@ -1,0 +1,16 @@
+@startuml sequencia-ocorrencia
+
+actor Catequista
+actor Coordenacao
+participant Sistema
+participant Banco
+
+Catequista -> Sistema: Criar ocorrência
+Sistema -> Banco: Salvar rascunho
+Catequista -> Sistema: Enviar ocorrência
+Sistema -> Coordenacao: Notificar análise
+Coordenacao -> Sistema: Avaliar ocorrência
+Sistema -> Banco: Atualizar status
+Sistema --> Coordenacao: Confirmação
+
+@enduml

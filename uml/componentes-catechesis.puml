@@ -1,0 +1,22 @@
+@startuml componentes-catechesis
+
+package "Frontend (JavaScript)" {
+  [Interface Web]
+}
+
+package "Backend (Java / Spring Boot)" {
+  [Controllers]
+  [Services]
+  [Repositories]
+}
+
+package "Banco de Dados (MySQL)" {
+  [Tabelas]
+}
+
+[Interface Web] --> [Controllers]
+[Controllers] --> [Services]
+[Services] --> [Repositories]
+[Repositories] --> [Tabelas]
+
+@enduml

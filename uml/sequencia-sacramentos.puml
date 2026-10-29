@@ -1,0 +1,12 @@
+@startuml sequencia-sacramentos
+
+actor Coordenacao
+participant Sistema
+participant Banco
+
+Coordenacao -> Sistema: Atualizar sacramento
+Sistema -> Banco: Registrar data/documento/celebrante
+Banco --> Sistema: OK
+Sistema --> Coordenacao: Confirmação
+
+@enduml

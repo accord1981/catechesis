@@ -1,0 +1,16 @@
+@startuml atividade-mudanca-turma
+
+start
+:Responsável solicita mudança;
+:Informar catequizando;
+:Informar nova turma desejada;
+:Coordenação avalia disponibilidade;
+if (Vaga disponível?) then (Sim)
+  :Realizar mudança;
+  :Atualizar histórico;
+else (Não)
+  :Notificar indisponibilidade;
+endif
+stop
+
+@enduml

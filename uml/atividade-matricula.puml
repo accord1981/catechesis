@@ -1,0 +1,15 @@
+@startuml atividade-matricula
+
+start
+:Receber dados do catequizando;
+:Validar documentos;
+if (Documentos OK?) then (Sim)
+  :Registrar matrícula;
+  :Associar catequizando à turma;
+else (Não)
+  :Gerar alerta de pendência documental;
+endif
+:Registrar categoria da matrícula;
+stop
+
+@enduml

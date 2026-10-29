@@ -1,0 +1,15 @@
+@startuml atividade-sacramentos
+
+start
+:Selecionar catequizando;
+:Verificar sacramentos recebidos;
+if (Sacramento recebido?) then (Sim)
+  :Registrar data;
+  :Registrar documento;
+  :Registrar celebrante;
+else (Não)
+  :Criar alerta de pendência sacramental;
+endif
+stop
+
+@enduml
