@@ -11,5 +11,6 @@ public class Catequista {
     public Catequista() {}
 
     // Getters e Setters
+    //inserindo métodos para manipular informações dentro da classe Catequista.
 }
 
